@@ -19,7 +19,7 @@ server.get('/api/users', (req, res) => {
 });
 
 //TODO GET -> User (Specific ID)
-server.get('api/users/:id', (req, res) => {
+server.get('/api/users/:id', (req, res) => {
   const id = req.params.id
 
   Data.find(id)
@@ -45,8 +45,19 @@ server.post('/api/users', (req, res) => {
     });
 });
 
-//TODO DELETE User
+// ✔ DELETE User
+server.delete('/api/users/:id', (req, res) => {
+  const id = req.params.id
 
+  Data.remove(id)
+    .then(deleted => {
+      res.status(200).json(deleted);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404).json({ errorMessage: "The user with that ID does not exist." });
+    });
+});
 
 
 //TODO PUT -> Edit User
