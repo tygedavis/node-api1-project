@@ -18,7 +18,7 @@ server.get('/api/users', (req, res) => {
     });
 });
 
-//TODO GET -> User (Specific ID)
+// ✔ GET -> User (Specific ID)
 server.get('/api/users/:id', (req, res) => {
   const id = req.params.id
 
