@@ -31,18 +31,25 @@ server.get('api/users/:id', (req, res) => {
     })
 })
 
-//TODO POST
+// ✔ POST User
 server.post('/api/users', (req, res) => {
   const userData = req.body;
 
-  Data.add(userData)
+  Data.insert(userData)
     .then(user => {
-      res.status(201).json(user)
+      res.status(201).json(user);
     })
     .catch(err => {
-      res.status(400).json({ errorMessage: "Please provide name and bio for the user."})
+      console.log(err);
+      res.status(400).json({ errorMessage: "Please provide name and bio for the user."});
     });
 });
+
+//TODO DELETE User
+
+
+
+//TODO PUT -> Edit User
 
 const port = 5000;
 server.listen(port, () => console.log(`\n API on port ${port}\n`));
