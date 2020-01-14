@@ -60,7 +60,23 @@ server.delete('/api/users/:id', (req, res) => {
 });
 
 
-//TODO PUT -> Edit User
+// ✔ PUT -> Edit User
+server.put('/api/users/:id', (req, res) => {
+  const userData = req.params.id;
+
+    Data.update(userData, req.body)
+      .then(user => {
+          if(!user) {
+            res.status(404).json({ errorMessage: "The user with that ID does not exist." })
+          }else if(!req.body.name || !req.body.bio){
+            res.status(400).json({ errorMessage: "Please provide name and bio for the user." })
+          }else
+            res.status(200).json(user)
+          })
+      .catch(err => {
+        res.status(400).json({ errorMessage: "Please provide name and bio for the user." })
+      })
+});
 
 const port = 5000;
 server.listen(port, () => console.log(`\n API on port ${port}\n`));
